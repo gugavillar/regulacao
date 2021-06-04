@@ -68,12 +68,6 @@ gulp.task('styles', function () {
 	.pipe(gulp.dest('dist/css/'));
 });
 
-/*gulp.task('fonts', function () {
-	return gulp.src('bower_components/materialize/fonts/roboto/*')
-	.pipe(rename({dirname: 'roboto'}))
-	.pipe(gulp.dest('dist/fonts'));
-});*/
-
 gulp.task('fontsglyphicons', function () {
 	return gulp.src('bower_components/glyphicons-only-bootstrap/fonts/*')
 	.pipe(rename({dirname: 'fonts'}))
