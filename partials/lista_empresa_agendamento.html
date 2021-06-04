@@ -1,0 +1,119 @@
+<div class="container big">
+	<h5 class="center-align">Lista de Agendamentos</h5>
+	<div class="row">
+		<div class="right radio-search">
+			<p>
+				<label>
+					<input name="query_type" type="radio" value="1"  data-ng-model="agendamento.query_type" />
+					<span>CNS</span>
+				</label>
+				<label>
+					<input name="query_type" type="radio" value="2" data-ng-model="agendamento.query_type" />
+					<span>CPF</span>
+				</label>
+			</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="input-field col s12 m6 l6 push-m6 push-l6">
+			<i class="material-icons prefix">search</i>
+			<input data-ng-if="agendamento.query_type === '1'" id="query" name="query" type="text" maxlength="18" data-ng-model="agendamento.query" data-ng-change="agendamento.search()" data-uicns>
+			<input data-ng-if="agendamento.query_type === '2'" id="query" name="query" type="text" maxlength="14" data-ng-model="agendamento.query" data-ng-change="agendamento.search()" data-uidoc>
+			<label for="query">Buscar Paciente</label>
+		</div>
+	</div>
+	<table class="highlight responsive-table centered" at-table at-paginated at-list="agendamento.agendamentos" at-config="agendamento.config">
+		<thead></thead>
+		<tbody>
+			<tr data-ng-class="item.status_agendamento | ColorDate">
+				<td at-title="Agendamento" at-implicit at-attribute="num_agendamento" width="10%"></td>
+				<td at-title="Data" at-implicit at-attribute="data_agendamento | Data" width="20%"></td>
+				<td at-title="CPF" at-implicit at-attribute="cpf_paciente | Cpf" width="10%"></td>
+				<td at-title="Nome" at-implicit at-attribute="nome_paciente" width="30%"></td>
+				<td at-title="Procedimento" at-implicit at-attribute="procedimento" width="20%"></td>
+				<td at-title="Ação" width="10%">
+					<a tooltips tooltip-side="bottom" tooltip-template="Clique para visualizar o paciente" data-ng-click="agendamento.ticket(item.id_agendamento)" class="btn-floating btn waves-effect waves-light add blue-grey lighten-1"><i class="material-icons">assignment</i></a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<at-pagination class="right-align" at-list="agendamento.agendamentos" at-config="agendamento.config"></at-pagination>
+</div>
+<!-- MODAL TICKET AGENDAMENTO -->
+<div id="ticket" class="modal modal-fixed-footer">
+	<div class="modal-content">
+		<img class="footer-img" src="dist/img/brasao.png">
+		<div class="row bloco-header">
+			<p class="right-align">SECRETARIA DE SAÚDE DE GRAVATÁ</p>
+			<h5 class="right-align">Agendamento de Número - {{agendamento.ticketAgendamento.num_agendamento}}</h5>
+			<p class="right-align">Agendado para {{agendamento.ticketAgendamento.data_agendamento | Data}}</p>
+		</div>
+		<div class="row">
+			<table>
+				<thead>
+					<tr class="grey lighten-3">
+						<th colspan="3" class="ticketAgendamento">DADOS DA SOLICITAÇÃO</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td colspan="3" class="ticketAgendamento"><strong>Procedimento:</strong> {{agendamento.ticketAgendamento.procedimento}}</td>
+					</tr>
+					<tr>
+						<td class="ticketAgendamento"><strong>Nome do Paciente</strong></td>
+						<td class="ticketAgendamento"><strong>CNS</strong></td>
+						<td class="ticketAgendamento"><strong>Nascimento</strong></td>
+					</tr>
+					<tr>
+						<td class="ticketAgendamento">{{agendamento.ticketAgendamento.nome_paciente}}</td>
+						<td class="ticketAgendamento">{{agendamento.ticketAgendamento.cns_paciente | Cns}}</td>	
+						<td class="ticketAgendamento">{{agendamento.ticketAgendamento.data_nascimento_paciente | date:'dd/MM/yyyy'}} ({{agendamento.ticketAgendamento.idade}} anos)</td>	
+					</tr>
+					<tr>
+						<td class="ticketAgendamento"><strong>Endereço Paciente</strong></td>
+						<td class="ticketAgendamento"><strong>Telefones</strong></td>
+					</tr>
+					<tr>
+						<td class="ticketAgendamento">{{agendamento.ticketAgendamento.logradouro_paciente}}, {{agendamento.ticketAgendamento.numero_paciente}} - {{agendamento.ticketAgendamento.bairro_paciente}}<br><span data-ng-if="agendamento.ticketAgendamento.complemento_paciente">{{agendamento.ticketAgendamento.complemento_paciente}}</span></td>
+						<td class="ticketAgendamento">{{agendamento.ticketAgendamento.telefone_um_paciente | Telefone}} <span data-ng-if="agendamento.ticketAgendamento.telefone_dois_paciente">{{agendamento.ticketAgendamento.telefone_dois_paciente | Telefone}}</span></td>
+					</tr>
+					<tr>
+						<td class="ticketAgendamento">{{agendamento.ticketAgendamento.cidade_paciente}} - {{agendamento.ticketAgendamento.estado_paciente}}</td>
+					</tr>
+					<tr>
+						<td class="ticketAgendamento"><strong>Nome Unidade Solicitante</strong></td>
+						<td class="ticketAgendamento"><strong>Conselho Profissional Solicitante</strong></td>
+					</tr>
+					<tr>
+						<td class="ticketAgendamento">{{agendamento.ticketAgendamento.nome_unidade_solicitante}}</td>
+						<td class="ticketAgendamento">{{agendamento.ticketAgendamento.profissional_solicitante_agendamento | tipoProfissional:agendamento.ticketAgendamento.doc_profissional_solicitante_agendamento}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<a class="modal-close waves-effect waves-light btn red">Fechar</a>
+		<a data-ng-if="agendamento.ticketAgendamento.status_agendamento === '1' && (agendamento.ticketAgendamento.data_agendamento | compareDate)" class="modal-close waves-effect waves-light btn" data-ng-click="agendamento.finalizarAtendimento(agendamento.ticketAgendamento.id_agendamento)">Finalizar</a>
+	</div>
+</div>
+
+<!-- MODAL TICKET FINALIZAR -->
+<div id="finalizar" class="modal modal-fixed-footer">
+	<div class="modal-content center-align">
+		<h4>Digite a senha do agendamento</h4>
+		<form name="formPresenca">
+			<div class="row">
+				<div class="input-field col s12 m12 l12">
+					<i class="material-icons prefix lock material-login">lock</i>
+					<input data-ng-model="agendamento.novo.senha_agendamento" data-ng-minlength="10" data-ng-pattern="/^((?=.*\d)(?=.*\w)[0-9A-Z]{10})/" name="senha_agendamento" id="senha_agendamento" type="text" data-ng-class="{'invalid': formPresenca.senha_agendamento.$error.minlength || formPresenca.senha_agendamento.$error.pattern}" required maxlength="10" data-uppercase>
+					<label for="senha_agendamento">Senha Agendamento</label>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<a class="modal-close waves-effect waves-light btn red" data-ng-click="agendamento.ticket(agendamento.ticketAgendamento.id_agendamento)">Voltar</a>
+		<button data-ng-click="agendamento.submitConfirmar(agendamento.novo.senha_agendamento)" class="waves-effect waves-light btn" data-ng-disabled="formPresenca.$invalid">Confirmar</button>
+	</div>
+</div>

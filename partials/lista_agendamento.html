@@ -1,0 +1,215 @@
+<div class="container big">
+	<h5 class="center-align">Lista de Agendamentos</h5>
+	<div class="row">
+		<div class="right radio-search">
+			<p>
+				<label>
+					<input name="query_type" type="radio" value="1"  data-ng-model="agendamento.query_type" />
+					<span>CNS</span>
+				</label>
+				<label>
+					<input name="query_type" type="radio" value="2" data-ng-model="agendamento.query_type" />
+					<span>CPF</span>
+				</label>
+			</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="input-field col s12 m6 l6 push-m6 push-l6">
+			<i class="material-icons prefix">search</i>
+			<input data-ng-if="agendamento.query_type === '1'" id="query" name="query" type="text" maxlength="18" data-ng-model="agendamento.query" data-ng-change="agendamento.search()" data-uicns>
+			<input data-ng-if="agendamento.query_type === '2'" id="query" name="query" type="text" maxlength="14" data-ng-model="agendamento.query" data-ng-change="agendamento.search()" data-uidoc>
+			<label for="query">Buscar Paciente</label>
+		</div>
+	</div>
+	<div class="row right-align">
+		<a data-ng-if="agendamento.printArray.length >= 1" class="waves-effect waves-light btn" data-ng-disabled="agendamento.printArray.length === 0" data-ui-sref="menu.imprimir_agendamento({agendamentos: agendamento.printArray})">Imprimir</a>
+	</div>
+	<table class="highlight responsive-table centered" at-table at-paginated at-list="agendamento.agendamentos" at-config="agendamento.config">
+		<thead></thead>
+		<tbody>
+			<tr data-ng-class="item.status_agendamento | ColorDate">
+				<td at-title="Agendamento" at-implicit at-attribute="num_agendamento" width="15%"></td>
+				<td at-title="CPF" at-implicit at-attribute="cpf_paciente | Cpf" width="10%"></td>
+				<td at-title="Nome" at-implicit at-attribute="nome_paciente" width="30%"></td>
+				<td at-title="Procedimento" at-implicit at-attribute="procedimento" width="20%"></td>
+				<td at-title="Ação" width="20%">
+					<a tooltips tooltip-side="bottom" tooltip-template="Clique para visualizar o paciente" data-ng-click="agendamento.ticket(item.id_agendamento)" class="btn-floating btn waves-effect waves-light add blue-grey lighten-1"><i class="material-icons">assignment</i></a>
+					<a data-ng-if="item.status_agendamento === '1'" data-ng-show="item.print" tooltips tooltip-side="bottom" tooltip-template="Marcado para imprimir" class="btn-floating btn waves-effect waves-light add blue-grey lighten-1" data-ng-click="agendamento.markPrint(this)"><i class="material-icons">print</i></a>
+					<a data-ng-if="item.status_agendamento === '1'" data-ng-show="!item.print" tooltips tooltip-side="bottom" tooltip-template="Não marcado para imprimir" class="btn-floating btn waves-effect waves-light add blue-grey lighten-1" data-ng-click="agendamento.markPrint(this)"><i class="material-icons">print_disabled</i></a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<at-pagination class="right-align" at-list="agendamento.agendamentos" at-config="agendamento.config"></at-pagination>
+</div>
+<!-- MODAL TICKET AGENDAMENTO -->
+<div id="ticket" class="modal modal-fixed-footer">
+	<div class="modal-content">
+		<img class="footer-img" src="dist/img/brasao.png">
+		<div class="row bloco-header">
+			<p class="right-align">SECRETARIA DE SAÚDE DE GRAVATÁ</p>
+			<h5 class="right-align">Comprovante de Agendamento - {{agendamento.ticketAgendamento.num_agendamento}}<br>Senha: {{agendamento.ticketAgendamento.senha_agendamento}}</h5>
+			<p class="right-align">Registrado em {{agendamento.ticketAgendamento.registro_agendamento | Data}}</p>
+		</div>
+		<div class="row">
+			<table>
+				<thead>
+					<tr class="grey lighten-3">
+						<th colspan="2" class="ticketAgendamento">UNIDADE EXECUTANTE</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="ticketAgendamento"><strong>Nome da Unidade</strong></td>
+						<td class="ticketAgendamento"><strong>Data do Agendamento</strong></td>
+					</tr>
+					<tr>
+						<td class="ticketAgendamento">{{agendamento.ticketAgendamento.nome_unidade_executora}}</td>
+						<td class="ticketAgendamento">{{agendamento.ticketAgendamento.data_agendamento | Data}}</td>	
+					</tr>
+					<tr>
+						<td class="ticketAgendamento">{{agendamento.ticketAgendamento.logradouro_unidade_executora}}, {{agendamento.ticketAgendamento.numero_unidade_executora}} - {{agendamento.ticketAgendamento.bairro_unidade_executora}}<br><span data-ng-if="agendamento.ticketAgendamento.complemento_unidade_executora">{{agendamento.ticketAgendamento.complemento_unidade_executora}}</span></td>
+					</tr>
+					<tr>
+						<td class="ticketAgendamento">{{agendamento.ticketAgendamento.cidade_unidade_executora}} - {{agendamento.ticketAgendamento.estado_unidade_executora}}</td>
+					</tr>
+					<tr>
+						<td class="ticketAgendamento"><strong>Procedimento:</strong> {{agendamento.ticketAgendamento.procedimento}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="row">
+			<table>
+				<thead>
+					<tr class="grey lighten-3">
+						<th colspan="3" class="ticketAgendamento">DADOS DA SOLICITAÇÃO</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="ticketAgendamento"><strong>Nome do Paciente</strong></td>
+						<td class="ticketAgendamento"><strong>CNS</strong></td>
+						<td class="ticketAgendamento"><strong>Nascimento</strong></td>
+					</tr>
+					<tr>
+						<td class="ticketAgendamento">{{agendamento.ticketAgendamento.nome_paciente}}</td>
+						<td class="ticketAgendamento">{{agendamento.ticketAgendamento.cns_paciente | Cns}}</td>	
+						<td class="ticketAgendamento">{{agendamento.ticketAgendamento.data_nascimento_paciente | date:'dd/MM/yyyy'}} ({{agendamento.ticketAgendamento.idade}} anos)</td>	
+					</tr>
+					<tr>
+						<td class="ticketAgendamento"><strong>Endereço Paciente</strong></td>
+						<td class="ticketAgendamento"><strong>Telefones</strong></td>
+					</tr>
+					<tr>
+						<td class="ticketAgendamento">{{agendamento.ticketAgendamento.logradouro_paciente}}, {{agendamento.ticketAgendamento.numero_paciente}} - {{agendamento.ticketAgendamento.bairro_paciente}}<br><span data-ng-if="agendamento.ticketAgendamento.complemento_paciente">{{agendamento.ticketAgendamento.complemento_paciente}}</span></td>
+						<td class="ticketAgendamento">{{agendamento.ticketAgendamento.telefone_um_paciente | Telefone}} <span data-ng-if="agendamento.ticketAgendamento.telefone_dois_paciente">{{agendamento.ticketAgendamento.telefone_dois_paciente | Telefone}}</span></td>
+					</tr>
+					<tr>
+						<td class="ticketAgendamento">{{agendamento.ticketAgendamento.cidade_paciente}} - {{agendamento.ticketAgendamento.estado_paciente}}</td>
+					</tr>
+					<tr>
+						<td class="ticketAgendamento"><strong>Nome Unidade Solicitante</strong></td>
+						<td class="ticketAgendamento"><strong>Conselho Profissional Solicitante</strong></td>
+					</tr>
+					<tr>
+						<td class="ticketAgendamento">{{agendamento.ticketAgendamento.nome_unidade_solicitante}}</td>
+						<td class="ticketAgendamento">{{agendamento.ticketAgendamento.profissional_solicitante_agendamento | tipoProfissional:agendamento.ticketAgendamento.doc_profissional_solicitante_agendamento}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="row" data-ng-if="agendamento.ticketMotivos.length">
+			<table>
+				<thead>
+					<tr class="grey lighten-3" data-ng-if="agendamento.motivoAgendamento">
+						<th colspan="2" class="ticketAgendamento">MOTIVOS DE REAGENDAMENTO</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-ng-repeat-start="item in agendamento.ticketMotivos" data-ng-if="item.tipo_motivo === '1'">
+						<td class="ticketAgendamento"><strong>Motivo</strong></td>
+						<td class="ticketAgendamento"><strong>Data</strong></td>
+					</tr>
+					<tr data-ng-repeat-end data-ng-if="item.tipo_motivo === '1'">
+						<td class="ticketAgendamento motivo">{{item.motivo}}</td>
+						<td class="ticketAgendamento data_motivo">{{item.data_motivo | Data}}</td>	
+					</tr>
+				</tbody>
+			</table>
+			<table>
+				<thead>
+					<tr class="grey lighten-3" data-ng-if="agendamento.motivoCancelamento">
+						<th colspan="2" class="ticketAgendamento">MOTIVOS DE CANCELAMENTO</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-ng-repeat-start="item in agendamento.ticketMotivos" data-ng-if="item.tipo_motivo === '2'">
+						<td class="ticketAgendamento"><strong>Motivo</strong></td>
+						<td class="ticketAgendamento"><strong>Data</strong></td>
+					</tr>
+					<tr data-ng-repeat-end data-ng-if="item.tipo_motivo === '2'">
+						<td class="ticketAgendamento motivo">{{item.motivo}}</td>
+						<td class="ticketAgendamento data_motivo">{{item.data_motivo | Data}}</td>	
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<a class="modal-close waves-effect waves-light btn red">Fechar</a>
+		<a class="modal-close waves-effect waves-light btn" data-ng-click="agendamento.reagendar(agendamento.ticketAgendamento.id_agendamento)" data-ng-if="agendamento.ticketAgendamento.status_agendamento === '1'">Reagendar</a>
+		<a class="modal-close waves-effect waves-light btn" data-ng-click="agendamento.cancelar(agendamento.ticketAgendamento.id_agendamento)" data-ng-if="agendamento.ticketAgendamento.status_agendamento === '1'">Cancelar</a>
+	</div>
+</div>
+<!-- MODAL TICKET REAGENDAMENTO -->
+<div id="reagendar" class="modal modal-fixed-footer">
+	<div class="modal-content center-align">
+		<h4>Escolha a data para qual deseja reagendar</h4>
+		<form name="formReagendamento">
+			<div class="row">
+				<div class="input-field col s12 m6 l6">
+					<i class="material-icons prefix">calendar_today</i>
+					<input id="data" class="datepicker" maxlength="10" data-ng-minlength="10" name="data" type="text" data-ng-model="agendamento.novo.data" required data-ng-pattern="/^(0[1-9]|1[0-9]|2[0-9]|3[01])[/](0[1-9]|1[012])[/]\d{4}$/" data-ng-class="{'invalid': formReagendamento.data.$error.minlength || formReagendamento.data.$error.pattern}" data-uidate>
+					<label for="data">Data Agendamento</label>
+				</div>
+				<div class="input-field col s12 m6 l6">
+					<i class="material-icons prefix">schedule</i>
+					<input id="hora" class="timepicker" maxlength="5" data-ng-minlength="5" name="hora" type="text" data-ng-model="agendamento.novo.hora" required data-ng-pattern="/^(\d{2}:\d{2})$/" data-ng-class="{'invalid': formReagendamento.hora.$error.minlength || formReagendamento.hora.$error.pattern}">
+					<label for="hora">Hora Agendamento</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12 m12 l12">
+					<i class="material-icons prefix">mode_edit</i>
+					<textarea id="motivo_reagendamento" name="motivo_reagendamento" data-ng-minlength="20" class="materialize-textarea" data-ng-model="agendamento.novo.motivo" data-ng-class="{'invalid': formReagendamento.motivo_reagendamento.$error.minlength}" msd-elastic required data-uppercase></textarea>
+					<label for="motivo_reagendamento">*Motivo (Mínimo de 20 caracteres)</label>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<a class="modal-close waves-effect waves-light btn red" data-ng-click="agendamento.ticket(agendamento.ticketAgendamento.id_agendamento)">Voltar</a>
+		<button data-ng-click="agendamento.submitReagendar(agendamento.ticketAgendamento.id_agendamento)" class="waves-effect waves-light btn" data-ng-disabled="formReagendamento.$invalid">Reagendar</button>
+	</div>
+</div>
+<!-- MODAL TICKET CANCELAMENTO -->
+<div id="cancelamento" class="modal modal-fixed-footer">
+	<div class="modal-content center-align">
+		<h4>Diga o motivo do cancelamento</h4>
+		<form name="formCancelamento">
+			<div class="row">
+				<div class="input-field col s12 m12 l12">
+					<i class="material-icons prefix">mode_edit</i>
+					<textarea id="motivo_cancelamento" name="motivo_cancelamento" data-ng-minlength="20" class="materialize-textarea" data-ng-model="agendamento.novo.motivo" data-ng-class="{'invalid': formCancelamento.motivo_cancelamento.$error.minlength}" msd-elastic required data-uppercase></textarea>
+					<label for="motivo_cancelamento">*Motivo (Mínimo de 20 caracteres)</label>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<a class="modal-close waves-effect waves-light btn red" data-ng-click="agendamento.ticket(agendamento.ticketAgendamento.id_agendamento)">Voltar</a>
+		<button data-ng-click="agendamento.submitCancelar(agendamento.ticketAgendamento.id_agendamento)" class="waves-effect waves-light btn" data-ng-disabled="formCancelamento.$invalid">Cancelar</button>
+	</div>
+</div>

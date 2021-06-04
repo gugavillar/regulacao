@@ -1,0 +1,37 @@
+<div class="container noprint">
+	<h5 class="center-align">Cadastrar Usuário</h5>
+	<form name="formUsuario" data-ng-submit="usuario.send()">
+		<div class="row">
+			<div class="input-field col s12 m12 l12">
+				<input id="name" name="name" maxlength="200" data-ng-minlength="10" data-ng-pattern="/^((?=\w\S)([A-Z\.\u00C0-\u00FF\s]{10,200}))$/" type="text" data-ng-class="{'invalid': formUsuario.name.$error.minlength || formUsuario.name.$error.pattern}" data-ng-model="usuario.dados.name" required data-uppercase>
+				<label for="name">Nome</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s12 m6 l6">
+				<select id="type" name="type" data-ng-model="usuario.dados.type" required data-ng-change="usuario.load(usuario.dados.type)">
+					<option value="" disabled selected>Escolha a opção</option>
+					<option value="1">Município</option>
+					<option value="2">Terceirizado</option>
+				</select>
+				<label for="type">Tipo Usuário</label>
+			</div>
+			<div class="input-field col s12 m6 l6">
+				<i class="material-icons prefix">account_circle</i>
+				<input data-ng-model="usuario.dados.user" data-ng-minlength="4" data-ng-minlength="10" data-ng-pattern="/^((?=\w\S)([a-z]{4,10}))$/" type="text" data-ng-class="{'invalid': formUsuario.usuario.$error.minlength || formUsuario.usuario.$error.pattern}" name="usuario" id="usuario" required maxlength="10">
+				<label for="usuario">Usuário</label>
+			</div>
+		</div>
+		<div class="row" data-ng-if="usuario.terceirizado">
+			<div class="input-field col s12 m12 l12">
+				<select required data-ng-options="item.id_unidade_executora as item.nome_unidade_executora for item in usuario.unidades_executoras | orderBy:'nome_unidade_executora'" data-ng-model="usuario.dados.business">
+					<option value="" disabled selected>UNIDADE EXECUTORA</option>
+				</select>
+				<label>Unidade Executora</label>
+			</div>
+		</div>
+		<div class="row right-align col s12 m12 l12">
+			<button class="waves-effect waves-light btn blue darken-2" data-ng-disabled="formUsuario.$invalid"><i class="material-icons right">send</i>Enviar</button>
+		</div>
+	</form>
+</div>

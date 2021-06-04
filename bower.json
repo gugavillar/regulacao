@@ -1,0 +1,45 @@
+{
+	"name": "regulacao",
+	"dependencies": {
+		"angular": "~1.6.4",
+		"angular-i18n": "~1.6.4",
+		"angular-ui-router": "~0.4.2",
+		"angular-resource": "~1.6.4",
+		"materialize": "1.0.0",
+		"jquery": "^3.2.1",
+		"at-table": "^1.0.7",
+		"glyphicons-only-bootstrap": "0.0.1",
+		"angular-tooltips": "^1.2.2",
+		"angular-elastic": "^2.5.1"
+	},
+	"install": {
+		"path": {
+			"js": "js/libs",
+			"css": "css/libs/{name}/css",
+			"less": "css/libs/{name}/less",
+			"eot": "css/libs/{name}/fonts",
+			"svg": "css/libs/{name}/fonts",
+			"ttf": "css/libs/{name}/fonts",
+			"woff": "css/libs/{name}/fonts",
+			"woff2": "css/libs/{name}/fonts"
+		},
+		"sources": {
+			"angular-i18n": "bower_components/angular-i18n",
+			"angular-tooltips": [
+				"bower_components/angular-tooltips/dist/angular-tooltips.min.js",
+				"bower_components/angular-tooltips/dist/angular-tooltips.min.css"
+			],
+			"angular-resource": "bower_components/angular-resource/angular-resource.js",
+			"angular-ui-router": "bower_components/angular-ui-router/release/angular-ui-router.js",
+			"angular": "bower_components/angular/angular.js",
+			"at-table": "bower_components/at-table/dist/angular-table.js",
+			"glyphicons-only-bootstrap": "bower_components/glyphicons-only-bootstrap/css/bootstrap.css",
+			"jquery": "bower_components/jquery/dist/jquery.js",
+			"angular-elastic": "bower_components/angular-elastic/elastic.js",
+			"materialize": [
+				"bower_components/materialize/dist/js/materialize.js",
+				"bower_components/materialize/dist/css/materialize.css"
+			]
+		}
+	}
+}

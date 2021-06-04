@@ -1,0 +1,58 @@
+<div class="container" id="dados_unidade">
+	<h5 class="center-align">Nova Unidade Executora</h5>
+	<form name="formUnidade" data-ng-submit="unidade.cadastrar()">
+		<div class="row">
+			<div class="input-field col s12 m12 l12">
+				<input id="nome_unidade_executora" name="nome_unidade_executora" type="text" maxlength="200" required data-ng-minlength="5" data-ng-pattern="/^((?=\w\S)([A-Z0-9\.\,\u00C0-\u00FF\(\)\u0027\s]{5,200}))$/" data-ng-model="unidade.novo.nome_unidade_executora" data-ng-class="{'invalid': formUnidade.nome_unidade_executora.$error.minlength || formUnidade.nome_unidade_executora.$error.pattern}" data-uppercase>
+				<label for="nome_unidade_executora">Nome da Unidade</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s12 m3 l3">
+				<input id="cep_unidade_executora" name="cep_unidade_executora" type="text" maxlength="9" required data-ng-minlength="9" data-ng-pattern="/^((?=\S)(\d{5}-\d{3}))$/" data-ng-model="unidade.novo.cep_unidade_executora" data-ng-blur="unidade.getEndereco(unidade.novo.cep_unidade_executora)" data-ng-class="{'invalid': formUnidade.cep_unidade_executora.$error.minlength || formUnidade.cep_unidade_executora.$error.pattern}" data-uicep>
+				<label for="cep_unidade_executora">Cep</label>
+			</div>
+			<div class="input-field col s10 m7 l7">
+				<i class="material-icons prefix">map</i>
+				<input id="cidade_unidade_executora" name="cidade_unidade_executora" type="text" maxlength="200" required data-ng-minlength="5" data-ng-pattern="/^((?=\S)([A-Z0-9\.\,\u00C0-\u00FF\s]{5,200}))$/" data-ng-model="unidade.novo.cidade_unidade_executora" data-ng-class="{'invalid': formUnidade.cidade_unidade_executora.$error.minlength || formUnidade.cidade_unidade_executora.$error.pattern}" data-uppercase>
+				<label for="cidade_unidade_executora">Cidade</label>
+			</div>
+			<div class="input-field col s2 m2 l2">
+				<input id="estado_unidade_executora" name="estado_unidade_executora" type="text" maxlength="2" data-ng-minlength="2" data-ng-pattern="/^((?=\S)([A-Z]{2}))$/" data-ng-model="unidade.novo.estado_unidade_executora" data-ng-class="{'invalid': formUnidade.estado_unidade_executora.$error.minlength || formUnidade.estado_unidade_executora.$error.pattern}" data-uppercase>
+				<label for="estado_unidade_executora">Estado</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s10 m10 l10">
+				<i class="material-icons prefix">place</i>
+				<input id="logradouro_unidade_executora" name="logradouro_unidade_executora" type="text" maxlength="300" required data-ng-minlength="5" data-ng-pattern="/^((?=\w\S)([A-Z0-9\.\,\u00C0-\u00FF\u0027\s]{5,300}))$/" data-ng-model="unidade.novo.logradouro_unidade_executora" data-ng-class="{'invalid': formUnidade.logradouro_unidade_executora.$error.minlength || formUnidade.logradouro_unidade_executora.$error.pattern}" data-uppercase>
+				<label for="logradouro_unidade_executora">Endereço</label>
+			</div>
+			<div class="input-field col s2 m2 l2">
+				<input id="numero_unidade_executora" name="numero_unidade_executora" type="text" maxlength="9" required data-ng-minlength="1" data-ng-pattern="/(^\d{1,9}[A-Z]?)|(S\/N)$/" data-ng-model="unidade.novo.numero_unidade_executora" data-ng-class="{'invalid': formUnidade.numero_unidade_executora.$error.minlength || formUnidade.numero_unidade_executora.$error.pattern}" data-uppercase>
+				<label for="numero_unidade_executora">N˚</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s12 m6 l6">
+				<input id="bairro_unidade_executora" name="bairro_unidade_executora" type="text" maxlength="200" required data-ng-minlength="5" data-ng-pattern="/^((?=\S)([A-Z0-9\.\,\u00C0-\u00FF\s]{5,200}))$/" data-ng-model="unidade.novo.bairro_unidade_executora" data-ng-class="{'invalid': formUnidade.bairro_unidade_executora.$error.minlength || formUnidade.bairro_unidade_executora.$error.pattern}" data-uppercase>
+				<label for="bairro_unidade_executora">Bairro</label>
+			</div>
+			<div class="input-field col s12 m6 l6">
+				<input id="complemento_unidade_executora" name="complemento_unidade_executora" type="text" maxlength="200" data-ng-minlength="5" data-ng-pattern="/^((?=\S)([A-Z0-9\.\,\u00C0-\u00FF\s]{5,200}))$/" data-ng-model="unidade.novo.complemento_unidade_executora" data-ng-class="{'invalid': formUnidade.complemento_unidade_executora.$error.minlength || formUnidade.complemento_unidade_executora.$error.pattern}" data-uppercase>
+				<label for="complemento_unidade_executora">Complemento (opcional)</label>
+			</div>
+		</div>
+		<div class="row right-align">
+			<button class="waves-effect waves-light btn" data-ng-disabled="formUnidade.$invalid">Cadastrar</button>
+		</div>
+	</form>
+</div>
+<!--Modal Resposta CEP-->
+<div id="resposta_cep" class="modal">
+	<div class="modal-content center-align" data-keyboard="false" data-backdrop="static">
+		<h4 class="red-text"><strong>Alerta!</strong></h4>
+		<p class="flow-text">CEP inválido digitar outro cep</p>
+		<button class="modal-action modal-close btn btn-default">Fechar</button>
+	</div>
+</div>

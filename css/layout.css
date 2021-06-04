@@ -1,0 +1,19 @@
+.bloco-header {
+	line-height: 0;
+}
+
+#ticket {
+	width: 70%;
+}
+
+.ticketAgendamento {
+	padding: 8px 5px;
+}
+
+.motivo {
+	width: 80%;
+}
+
+.data_motivo {
+	width: 20%;
+}

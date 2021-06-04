@@ -1,0 +1,95 @@
+<div id="dados_paciente" class="container">
+	<h5 class="center-align">Novo Paciente</h5>
+	<form name="formPaciente" data-ng-submit="paciente.cadastrar()">
+		<div class="row">
+			<div class="input-field col s12 m12 l12">
+				<i class="material-icons prefix">person</i>
+				<input id="nome_paciente" name="nome_paciente" type="text" maxlength="300" required data-ng-minlength="5" data-ng-pattern="/^((?=\w\S)([A-Z0-9\.\,\u00C0-\u00FF\(\)\u0027\s]{5,300}))$/" data-ng-model="paciente.novo.nome_paciente" data-ng-class="{'invalid': formPaciente.nome_paciente.$error.minlength || formPaciente.nome_paciente.$error.pattern}" data-uppercase>
+				<label for="nome_paciente">Nome</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s12 m4 l4">
+				<i class="material-icons prefix">calendar_today</i>
+				<input id="data_nascimento_paciente" name="data_nascimento_paciente" type="text" maxlength="10" data-ng-model="paciente.novo.data_nascimento_paciente" data-ng-pattern="/^(0[1-9]|1[0-9]|2[0-9]|3[01])[/](0[1-9]|1[012])[/]\d{4}$/" data-ng-minlength="10" data-ng-class="{'invalid': formPaciente.data_nascimento_paciente.$error.minlength || formPaciente.data_nascimento_paciente.$error.pattern}" required data-uidate>
+				<label for="data_nascimento_paciente">Nascimento</label>
+			</div>
+			<div class="input-field col s12 m4 l4">
+				<i class="material-icons prefix">credit_card</i>
+				<input id="cpf_paciente" name="cpf_paciente" data-ng-minlength="14" data-ng-pattern="/^((?=\w\S)(\d){3}\.(\d){3}\.(\d){3}\-(\d){2})/" maxlength="14" type="text" data-ng-class="{'invalid': formPaciente.cpf_paciente.$error.minlength || formPaciente.cpf_paciente.$error.pattern}" data-ng-model="paciente.novo.cpf_paciente" data-uidoc required>
+				<label for="cpf_paciente">CPF</label>
+			</div>
+			<div class="input-field col s12 m4 l4">
+				<i class="material-icons prefix">credit_card</i>
+				<input id="cns_paciente" name="cns_paciente" data-ng-minlength="18" data-ng-pattern="/^((?=\w\S)(\d){3}\.(\d){4}\-(\d){4}\-(\d){4})/" maxlength="18" type="text" data-ng-class="{'invalid': formPaciente.cns_paciente.$error.minlength || formPaciente.cns_paciente.$error.pattern}" data-ng-model="paciente.novo.cns_paciente" data-uicns required>
+				<label for="cns_paciente">CNS</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s12 m6 l6">
+				<i class="material-icons prefix">phone</i>
+				<input id="telefone_um_paciente" name="telefone_um_paciente" maxlength="15" data-ng-minlength="14 || 15" data-ng-pattern="/^(\(\d{2}\) \d{4,5}-\d{4})/" type="text" data-ng-model="paciente.novo.telefone_um_paciente" data-ng-class="{'invalid': formPaciente.telefone_um_paciente.$error.minlength || formPaciente.telefone_um_paciente.$error.pattern}" data-uiphone required>
+				<label for="telefone_um_paciente">Telefone 1</label>
+			</div>
+			<div class="input-field col s12 m6 l6">
+				<i class="material-icons prefix">phone</i>
+				<input id="telefone_dois_paciente" name="telefone_dois_paciente" maxlength="15" data-ng-minlength="14 || 15" data-ng-pattern="/^(\(\d{2}\) \d{4,5}-\d{4})/" type="text" data-ng-model="paciente.novo.telefone_dois_paciente" data-ng-class="{'invalid': formPaciente.telefone_dois_paciente.$error.minlength || formPaciente.telefone_dois_paciente.$error.pattern}" data-uiphone>
+				<label for="telefone_dois_paciente">Telefone 2 (opcional)</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s12 m6 l6 push-m3 push-l3">
+				<i class="material-icons prefix">mail</i>
+				<input id="email_paciente" name="email_paciente" maxlength="200" data-ng-minlength="10" data-ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" type="email" data-ng-class="{'invalid': formPaciente.email_paciente.$error.minlength || formPaciente.email_paciente.$error.pattern}" data-ng-model="paciente.novo.email_paciente">
+				<label for="email_paciente">Email (opcional)</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s12 m3 l3">
+				<input id="cep_paciente" name="cep_paciente" type="text" maxlength="9" required data-ng-minlength="9" data-ng-pattern="/^((?=\S)(\d{5}-\d{3}))$/" data-ng-model="paciente.novo.cep_paciente" data-ng-blur="paciente.getEndereco(paciente.novo.cep_paciente)" data-ng-class="{'invalid': formPaciente.cep_paciente.$error.minlength || formPaciente.cep_paciente.$error.pattern}" data-uicep>
+				<label for="cep_paciente">Cep</label>
+			</div>
+			<div class="input-field col s10 m7 l7">
+				<i class="material-icons prefix">map</i>
+				<input id="cidade_paciente" name="cidade_paciente" type="text" maxlength="200" required data-ng-minlength="5" data-ng-pattern="/^((?=\S)([A-Z0-9\.\,\u00C0-\u00FF\s]{5,200}))$/" data-ng-model="paciente.novo.cidade_paciente" data-ng-class="{'invalid': formPaciente.cidade_paciente.$error.minlength || formPaciente.cidade_paciente.$error.pattern}" data-uppercase>
+				<label for="cidade_paciente">Cidade</label>
+			</div>
+			<div class="input-field col s2 m2 l2">
+				<input id="estado_paciente" name="estado_paciente" type="text" maxlength="2" data-ng-minlength="2" data-ng-pattern="/^((?=\S)([A-Z]{2}))$/" data-ng-model="paciente.novo.estado_paciente" data-ng-class="{'invalid': formPaciente.estado_paciente.$error.minlength || formPaciente.estado_paciente.$error.pattern}" data-uppercase>
+				<label for="estado_paciente">Estado</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s10 m10 l10">
+				<i class="material-icons prefix">place</i>
+				<input id="logradouro_paciente" name="logradouro_paciente" type="text" maxlength="300" required data-ng-minlength="5" data-ng-pattern="/^((?=\w\S)([A-Z0-9\.\,\u00C0-\u00FF\u0027\s]{5,300}))$/" data-ng-model="paciente.novo.logradouro_paciente" data-ng-class="{'invalid': formPaciente.logradouro_paciente.$error.minlength || formPaciente.logradouro_paciente.$error.pattern}" data-uppercase>
+				<label for="logradouro_paciente">Endereço</label>
+			</div>
+			<div class="input-field col s2 m2 l2">
+				<input id="numero_paciente" name="numero_paciente" type="text" maxlength="9" required data-ng-minlength="1" data-ng-pattern="/(^\d{1,9}[A-Z]?)|(S\/N)$/" data-ng-model="paciente.novo.numero_paciente" data-ng-class="{'invalid': formPaciente.numero_paciente.$error.minlength || formPaciente.numero_paciente.$error.pattern}" data-uppercase>
+				<label for="numero_paciente">N˚</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s12 m6 l6">
+				<input id="bairro_paciente" name="bairro_paciente" type="text" maxlength="200" required data-ng-minlength="5" data-ng-pattern="/^((?=\S)([A-Z0-9\.\,\u00C0-\u00FF\s]{5,200}))$/" data-ng-model="paciente.novo.bairro_paciente" data-ng-class="{'invalid': formPaciente.bairro_paciente.$error.minlength || formPaciente.bairro_paciente.$error.pattern}" data-uppercase>
+				<label for="bairro_paciente">Bairro</label>
+			</div>
+			<div class="input-field col s12 m6 l6">
+				<input id="complemento_paciente" name="complemento_paciente" type="text" maxlength="200" data-ng-minlength="5" data-ng-pattern="/^((?=\S)([A-Z0-9\.\,\u00C0-\u00FF\s]{5,200}))$/" data-ng-model="paciente.novo.complemento_paciente" data-ng-class="{'invalid': formPaciente.complemento_paciente.$error.minlength || formPaciente.complemento_paciente.$error.pattern}" data-uppercase>
+				<label for="complemento_paciente">Complemento (opcional)</label>
+			</div>
+		</div>
+		<div class="row right-align">
+			<button class="waves-effect waves-light btn" data-ng-disabled="formPaciente.$invalid">Cadastrar</button>
+		</div>
+	</form>
+</div>
+<!--Modal Resposta CEP-->
+<div id="resposta_cep" class="modal">
+	<div class="modal-content center-align" data-keyboard="false" data-backdrop="static">
+		<h4 class="red-text"><strong>Alerta!</strong></h4>
+		<p class="flow-text">CEP inválido digitar outro cep</p>
+		<button class="modal-action modal-close btn btn-default">Fechar</button>
+	</div>
+</div>

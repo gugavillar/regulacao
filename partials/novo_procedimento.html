@@ -1,0 +1,26 @@
+<div class="container">
+	<h5 class="center-align">Novo Procedimento</h5>
+	<form name="formProcedimento" data-ng-submit="procedimento.cadastrar()">
+		<div class="row">
+			<div class="input-field col s12 m3 l3">
+				<input id="cod_procedimento" name="cod_procedimento" data-ng-minlength="5" data-ng-pattern="/^((?=\w\S)(\d){5,15})/" maxlength="15" type="text" data-ng-class="{'invalid': formProcedimento.cod_procedimento.$error.minlength || formProcedimento.cod_procedimento.$error.pattern}" data-ng-model="procedimento.novo.cod_procedimento" data-uinum required>
+				<label for="cod_procedimento">Código Procedimento</label>
+			</div>
+			<div class="input-field col s12 m9 l9">
+				<input id="procedimento" name="procedimento" type="text" maxlength="200" required data-ng-minlength="5" data-ng-pattern="/^((?=\w\S)([A-Z0-9\.\,\u00C0-\u00FF\(\)\u0027\s]{5,200}))$/" data-ng-model="procedimento.novo.procedimento" data-ng-class="{'invalid': formProcedimento.procedimento.$error.minlength || formProcedimento.procedimento.$error.pattern}" data-uppercase>
+				<label for="procedimento">Procedimento</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s12 m12 l12">
+				<select required data-ng-options="item.id_unidade_executora as item.nome_unidade_executora for item in procedimento.unidades_executoras | orderBy:'nome_unidade_executora'" data-ng-model="procedimento.novo.id_unidade_procedimento">
+					<option value="" disabled selected>UNIDADE EXECUTORA</option>
+				</select>
+				<label>Unidade Executora</label>
+			</div>
+		</div>
+		<div class="row right-align">
+			<button class="waves-effect waves-light btn" data-ng-disabled="formProcedimento.$invalid">Cadastrar</button>
+		</div>
+	</form>
+</div>

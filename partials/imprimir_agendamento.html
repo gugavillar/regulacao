@@ -1,0 +1,88 @@
+<div class="container big">
+	<h5 class="center-align noprint">Imprimir Agendamentos</h5>
+	<div class="row" data-ng-repeat="item in agendamento.ticketAgendamento">
+		<table>
+			<tbody>
+				<tr>
+					<td>
+						<img class="print-img" src="dist/img/brasao.png">
+					</td>
+					<td>
+						<h6 class="right-align">SECRETARIA DE SAÚDE DE GRAVATÁ</h6>
+						<h5 class="right-align">Comprovante de Agendamento - {{item.num_agendamento}}<br>Senha: {{item.senha_agendamento}}</h5>
+						<h6 class="right-align">Registrado em {{item.registro_agendamento | Data}}</h6>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="row">
+			<table>
+				<thead>
+					<tr class="grey lighten-3">
+						<th colspan="2" class="ticketAgendamento">UNIDADE EXECUTANTE</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="ticketAgendamento"><strong>Nome da Unidade</strong></td>
+						<td class="ticketAgendamento"><strong>Data do Agendamento</strong></td>
+					</tr>
+					<tr>
+						<td class="ticketAgendamento">{{item.nome_unidade_executora}}</td>
+						<td class="ticketAgendamento">{{item.data_agendamento | Data}}</td>	
+					</tr>
+					<tr>
+						<td class="ticketAgendamento">{{item.logradouro_unidade_executora}}, {{item.numero_unidade_executora}} - {{item.bairro_unidade_executora}}<br><span data-ng-if="item.complemento_unidade_executora">{{item.complemento_unidade_executora}}</span></td>
+					</tr>
+					<tr>
+						<td class="ticketAgendamento">{{item.cidade_unidade_executora}} - {{item.estado_unidade_executora}}</td>
+					</tr>
+					<tr>
+						<td class="ticketAgendamento"><strong>Procedimento:</strong> {{item.procedimento}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="row">
+			<table>
+				<thead>
+					<tr class="grey lighten-3">
+						<th colspan="3" class="ticketAgendamento">DADOS DA SOLICITAÇÃO</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="ticketAgendamento"><strong>Nome do Paciente</strong></td>
+						<td class="ticketAgendamento"><strong>CNS</strong></td>
+						<td class="ticketAgendamento"><strong>Nascimento</strong></td>
+					</tr>
+					<tr>
+						<td class="ticketAgendamento">{{item.nome_paciente}}</td>
+						<td class="ticketAgendamento">{{item.cns_paciente | Cns}}</td>	
+						<td class="ticketAgendamento">{{item.data_nascimento_paciente | date:'dd/MM/yyyy'}} ({{item.idade}} anos)</td>	
+					</tr>
+					<tr>
+						<td class="ticketAgendamento"><strong>Endereço Paciente</strong></td>
+						<td class="ticketAgendamento"><strong>Telefones</strong></td>
+					</tr>
+					<tr>
+						<td class="ticketAgendamento">{{item.logradouro_paciente}}, {{item.numero_paciente}} - {{item.bairro_paciente}}<br><span data-ng-if="item.complemento_paciente">{{item.complemento_paciente}}</span></td>
+						<td class="ticketAgendamento">{{item.telefone_um_paciente | Telefone}} <span data-ng-if="item.telefone_dois_paciente">{{item.telefone_dois_paciente | Telefone}}</span></td>
+					</tr>
+					<tr>
+						<td class="ticketAgendamento">{{item.cidade_paciente}} - {{item.estado_paciente}}</td>
+					</tr>
+					<tr>
+						<td class="ticketAgendamento"><strong>Nome Unidade Solicitante</strong></td>
+						<td class="ticketAgendamento"><strong>Profissional Solicitante</strong></td>
+					</tr>
+					<tr>
+						<td class="ticketAgendamento">{{item.nome_unidade_solicitante}}</td>
+						<td class="ticketAgendamento"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<hr class="onlyprint">
+	</div>
+</div>

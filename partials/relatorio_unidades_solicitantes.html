@@ -1,0 +1,39 @@
+<div class="container">
+	<h5 class="center-align">Relatório Unidades Solicitantes por Período</h5>
+	<form name="formRelatorio">
+		<div class="row">
+			<div class="input-field col s12 m6 l6">
+				<input id="inicio" class="datepicker" maxlength="10" data-ng-minlength="10" name="inicio" type="text" data-ng-model="relatorio.novo.inicio" required data-ng-pattern="/^(0[1-9]|1[0-9]|2[0-9]|3[01])[/](0[1-9]|1[012])[/]\d{4}$/" data-ng-class="{'invalid': formRelatorio.inicio.$error.minlength || formRelatorio.inicio.$error.pattern}" data-uidate>
+				<label for="inicio">Início Período</label>
+			</div>
+			<div class="input-field col s12 m6 l6">
+				<input id="fim" class="datepicker" maxlength="10" data-ng-minlength="10" name="fim" type="text" data-ng-model="relatorio.novo.fim" required data-ng-pattern="/^(0[1-9]|1[0-9]|2[0-9]|3[01])[/](0[1-9]|1[012])[/]\d{4}$/" data-ng-class="{'invalid': formRelatorio.fim.$error.minlength || formRelatorio.fim.$error.pattern}" data-uidate>
+				<label for="fim">Fim Período</label>
+			</div>
+		</div>
+		<div class="row right-align">
+			<button data-ng-click="relatorio.gerarRelatorio()" class="waves-effect waves-light btn" data-ng-disabled="formRelatorio.$invalid">Gerar</button>
+		</div>
+	</form>
+</div>
+<div class="container big" data-ng-if="relatorio.data.length">
+	<h5 class="center-align">{{relatorio.novo.inicio | date:'dd/MM/yyyy'}} à {{relatorio.novo.fim | date:'dd/MM/yyyy'}}</h5>
+	<table class="stripped">
+		<thead>
+			<tr>
+				<th>Unidade</th>
+				<th>Procedimento</th>
+				<th>Status</th>
+				<th class="center-align">Total</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr data-ng-repeat="item in relatorio.data">
+				<td>{{item.nome_unidade_solicitante}}</td>
+				<td>{{item.procedimento}}</td>
+				<td>{{item.status_agendamento | Status}}</td>
+				<td class="center-align">{{item.total}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

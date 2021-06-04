@@ -1,0 +1,40 @@
+<div class="container big">
+	<h5 class="center-align">Lista de Pacientes</h5>
+	<div class="row">
+		<div class="right radio-search">
+			<p>
+				<label>
+					<input name="query_type" type="radio" value="1"  data-ng-model="paciente.query_type" />
+					<span>CNS</span>
+				</label>
+				<label>
+					<input name="query_type" type="radio" value="2" data-ng-model="paciente.query_type" />
+					<span>CPF</span>
+				</label>
+			</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="input-field col s12 m6 l6 push-m6 push-l6">
+			<i class="material-icons prefix">search</i>
+			<input data-ng-if="paciente.query_type === '1'" id="query" name="query" type="text" maxlength="18" data-ng-model="paciente.query" data-ng-change="paciente.search()" data-uicns>
+			<input data-ng-if="paciente.query_type === '2'" id="query" name="query" type="text" maxlength="14" data-ng-model="paciente.query" data-ng-change="paciente.search()" data-uidoc>
+			<label for="query">Buscar Paciente</label>
+		</div>
+	</div>
+	<table class="highlight responsive-table centered" at-table at-paginated at-list="paciente.pacientes" at-config="paciente.config">
+		<thead></thead>
+		<tbody>
+			<tr>
+				<td at-title="CNS" at-implicit at-attribute="cns_paciente | Cns" width="15%"></td>
+				<td at-title="CPF" at-implicit at-attribute="cpf_paciente | Cpf" width="15%"></td>
+				<td at-title="Nome" at-implicit at-attribute="nome_paciente" width="50%"></td>
+				<td at-title="Ação" width="20%">
+					<a tooltips tooltip-side="bottom" tooltip-template="Clique para editar o paciente" data-ui-sref="menu.editar_paciente({id_paciente: item.id_paciente})" class="btn-floating btn waves-effect waves-light add blue-grey lighten-1"><i class="material-icons">edit</i></a>
+					<a data-ng-if="paciente.check === 0" tooltips tooltip-side="bottom" tooltip-template="Clique para excluir o paciente" data-ng-click="paciente.excluir(item.id_paciente)" class="btn-floating btn waves-effect waves-light add red"><i class="material-icons">delete</i></a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<at-pagination class="right-align" at-list="paciente.pacientes" at-config="paciente.config"></at-pagination>
+</div>

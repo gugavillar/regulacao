@@ -1,0 +1,66 @@
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+main {
+	flex: 1 0 auto;
+}
+
+.page-footer {
+	padding-top: 0px !important;
+	background-color: #03A3A9;
+}
+
+.footer-img {
+	width: 70px;
+}
+
+.print-img {
+	width: 70px;
+}
+
+.login {
+	border-radius: 5%;
+}
+
+nav a.sidenav-trigger {
+	display: block;
+}
+
+nav {
+	background-color: #03A3A9;
+}
+
+ul>li>a {
+	cursor: pointer;
+}
+
+.big {
+	width: 85%;
+}
+
+header, main, footer {
+	padding-left: 300px;
+}
+
+.sidenav .user-view .circle {
+	margin: 0 auto;
+	height: 80px;
+	width: 70px;
+}
+
+.radio-search {
+	margin-bottom: -35px;
+}
+
+.onlyprint {
+	display: none;
+}
+
+@media only screen and (max-width : 992px) {
+	header, main, footer {
+		padding-left: 0;
+	}
+}

@@ -1,0 +1,58 @@
+<div class="container">
+	<h5 class="center-align">Novo Agendamento</h5>
+	<form name="formAgendamento" data-ng-submit="agendamento.agendar()">
+		<div class="row">
+			<div class="input-field col s12 m12 l12">
+				<select required data-ng-options="item.id_paciente as (item.cns_paciente | Cns) + ' - ' + (item.nome_paciente) for item in agendamento.pacientes" data-ng-model="agendamento.novo.id_paciente_agendamento">
+					<option value="" disabled selected>PACIENTE</option>
+				</select>
+				<label>Paciente</label>
+			</div>
+			<div class="input-field col s12 m12 l12">
+				<select required data-ng-options="item.id_unidade_solicitante as (item.cod_unidade_solicitante) + ' - ' + (item.nome_unidade_solicitante) for item in agendamento.unidades_solicitantes" data-ng-model="agendamento.novo.id_unidade_solicitante_agendamento">
+					<option value="" disabled selected>UNIDADE SOLICITANTE</option>
+				</select>
+				<label>Unidade Solicitante</label>
+			</div>
+			<div class="input-field col s6 m6 l6">
+				<select required data-ng-model="agendamento.novo.profissional_solicitante_agendamento">
+					<option value="" disabled selected>PROFISSIONAL SOLICITANTE</option>
+					<option value="1">MÉDICO</option>
+					<option value="2">DENTISTA</option>
+					<option value="3">ENFERMEIRO</option>
+				</select>
+				<label>Profissional Solicitante</label>
+			</div>
+			<div class="input-field col s6 m6 l6">
+				<i class="material-icons prefix">card_membership</i>
+				<input id="doc_profissional_solicitante_agendamento" name="doc_profissional_solicitante_agendamento" data-ng-minlength="4" data-ng-pattern="/^(\d{4,13})[A-Z]{2}$/" maxlength="15" type="text" data-ng-class="{'invalid': formAgendamento.doc_profissional_solicitante_agendamento.$error.minlength || formAgendamento.doc_profissional_solicitante_agendamento.$error.pattern}" data-ng-model="agendamento.novo.doc_profissional_solicitante_agendamento" required data-uppercase>
+				<label for="doc_profissional_solicitante_agendamento">N˚ Conselho</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s12 m12 l12">
+				<select required data-ng-options="item.id_unidade_executora as item.nome_unidade_executora for item in agendamento.unidades_executoras | orderBy:'nome_unidade_executora'" data-ng-model="agendamento.novo.id_unidade_executante_agendamento" data-ng-change="agendamento.getProcedimentos(agendamento.novo.id_unidade_executante_agendamento)">
+					<option value="" disabled selected>UNIDADE EXECUTORA</option>
+				</select>
+				<label>Unidade Executora</label>
+			</div>
+			<div class="input-field col s12 m12 l12">
+				<select id="procedimento" required data-ng-options="item.id_procedimento as (item.cod_procedimento + ' - ' + item.procedimento) for item in agendamento.procedimentos" data-ng-model="agendamento.novo.id_procedimento_agendamento">
+					<option value="" disabled selected>PROCEDIMENTO</option>
+				</select>
+				<label>Procedimento</label>
+			</div>
+			<div class="input-field col s12 m6 l6">
+				<input id="data" class="datepicker" maxlength="10" data-ng-minlength="10" name="data" type="text" data-ng-model="agendamento.novo.data" required data-ng-pattern="/^(0[1-9]|1[0-9]|2[0-9]|3[01])[/](0[1-9]|1[012])[/]\d{4}$/" data-ng-class="{'invalid': formAgendamento.data.$error.minlength || formAgendamento.data.$error.pattern}" data-uidate>
+				<label for="data">Data Agendamento</label>
+			</div>
+			<div class="input-field col s12 m6 l6">
+				<input id="hora" class="timepicker" maxlength="5" data-ng-minlength="5" name="hora" type="text" data-ng-model="agendamento.novo.hora" required data-ng-pattern="/^(\d{2}:\d{2})$/" data-ng-class="{'invalid': formAgendamento.hora.$error.minlength || formAgendamento.hora.$error.pattern}">
+				<label for="hora">Hora Agendamento</label>
+			</div>
+		</div>
+		<div class="row right-align">
+			<button class="waves-effect waves-light btn" data-ng-disabled="formAgendamento.$invalid">Agendar</button>
+		</div>
+	</form>
+</div>

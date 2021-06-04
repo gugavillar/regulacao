@@ -1,0 +1,46 @@
+@media print {
+	@page {
+		size: A4;
+		margin: 1.3cm 0.5cm 1.3cm 0.5cm;
+	}
+	html, body {
+		width: 210mm;
+		height: 280mm;
+		font-size: 12px;
+		box-shadow: none;
+		display: block;
+	}
+	.noprint {
+		display: none;
+	}
+	main {
+		padding-left: 0;
+	}
+	.onlyprint {
+		display: block;
+	}
+	h5 {
+		font-size: 12px;
+		font-weight: bold;
+	}
+	table, h6 {
+		font-size: 8.5px;
+	}
+	h5 {
+		margin-top: -3px;
+		margin-bottom: -5px;
+	}
+	.ticketAgendamento {
+		padding: 2px 5px;
+	}
+	.print-img {
+		width: 50px;
+	}
+	.row {
+		margin-bottom: 5px;
+		margin-top: -10px;
+	}
+	hr {
+		border: 1.2px dashed black;
+	}
+}

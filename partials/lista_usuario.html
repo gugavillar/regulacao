@@ -1,0 +1,18 @@
+<div class="box noprint">
+	<h5 class="center-align">Lista de Usuários</h5>
+	<table class="table highlight responsive-table centered" at-table at-paginated at-list="lista.usuarios" at-config="lista.config">
+		<thead></thead>
+		<tbody>
+			<tr>
+				<td at-title="Nome" at-implicit at-attribute="name" width="50%"></td>
+				<td at-title="Usuário" at-implicit at-attribute="user" width="15%"></td>
+				<td at-title="Tipo" data-ng-bind="item.type | userType" width="15%"></td>
+				<td at-title="Ação" width="20%">
+					<a data-position="bottom" data-delay="50" data-tooltip="Clique redefinir a senha do usuário" data-ng-click="lista.redefinir(item.id)" class="btn-floating btn waves-effect waves-light add blue-grey lighten-1 tooltipped"><i class="material-icons">lock</i></a>
+					<a data-ng-if="item.id > 1" data-position="bottom" data-delay="50" data-tooltip="Clique excluir o usuário" data-ng-click="lista.deleteUser(item.id)" class="btn-floating btn waves-effect waves-light add red tooltipped"><i class="material-icons">delete</i></a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<at-pagination class="right-align" at-list="lista.usuarios" at-config="lista.config"></at-pagination>
+</div>

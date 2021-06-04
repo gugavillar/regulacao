@@ -1,0 +1,84 @@
+<ul id="slide-out" class="sidenav sidenav-fixed noprint">
+	<li>
+		<div class="user-view center-align">
+			<a><img class="circle" src="dist/img/brasao.png"></a>
+			<a><span class="name">Prefeitura de Gravatá</span></a>
+			<a><span class="email">Secretaria Municipal de Saúde</span></a>
+		</div>
+	</li>
+	<li><div class="divider"></div></li>
+	<li>
+		<ul class="collapsible">
+			<li>
+				<a class="collapsible-header waves-effect">Agendamentos<i class="material-icons right">arrow_drop_down</i></a>
+				<div class="collapsible-body">
+					<ul>
+						<li class="sidenav-close"><a data-ui-sref="menu.novo_agendamento">Novo Agendamento</a></li>
+						<li class="sidenav-close"><a data-ui-sref="menu.lista_agendamento({status_agendamento: 1})">Agendamentos Marcados</a></li>
+						<li class="sidenav-close"><a data-ui-sref="menu.lista_agendamento({status_agendamento: 2})">Agendamentos Finalizados</a></li>
+						<li class="sidenav-close"><a data-ui-sref="menu.lista_agendamento({status_agendamento: 3})">Agendamentos Cancelados</a></li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li><div class="divider"></div></li>
+	<li>
+		<ul class="collapsible">
+			<li>
+				<a class="collapsible-header waves-effect">Pacientes<i class="material-icons right">arrow_drop_down</i></a>		
+				<div class="collapsible-body">
+					<ul>
+						<li class="sidenav-close"><a data-ui-sref="menu.novo_paciente">Novo Paciente</a></li>
+						<li class="sidenav-close"><a data-ui-sref="menu.lista_paciente">Listar Pacientes</a></li>
+					</ul>
+				</div>
+			</li>
+		</ul>		
+	</li>
+	<li data-ng-if="menu.check === '0'"><div class="divider"></div></li>
+	<li data-ng-if="menu.check === '0'">
+		<ul class="collapsible">
+			<li>
+				<a class="collapsible-header waves-effect">Relatórios<i class="material-icons right">arrow_drop_down</i></a>		
+				<div class="collapsible-body">
+					<ul>
+						<li class="sidenav-close"><a data-ui-sref="menu.relatorio_procedimentos">Relatório Procedimento</a></li>
+						<li class="sidenav-close"><a data-ui-sref="menu.relatorio_unidades_solicitantes">Relatório Unidades Solicitantes</a></li>
+						<li class="sidenav-close"><a data-ui-sref="menu.relatorio_pacientes">Relatório Pacientes</a></li>
+					</ul>
+				</div>
+			</li>
+		</ul>		
+	</li>
+	<li data-ng-if="menu.check === '0'"><div class="divider"></div></li>
+	<li data-ng-if="menu.check === '0'">
+		<ul class="collapsible">
+			<li>
+				<a class="collapsible-header waves-effect">Configurações<i class="material-icons right">arrow_drop_down</i></a>		
+				<div class="collapsible-body">
+					<ul>
+						<li class="sidenav-close"><a data-ui-sref="menu.novo_unidade_executora">Nova Unidade Executora</a></li>
+						<li class="sidenav-close"><a data-ui-sref="menu.lista_unidade_executora">Listar Unidades Executoras</a></li>
+						<li class="sidenav-close"><a data-ui-sref="menu.novo_unidade_solicitante">Nova Unidade Solicitante</a></li>
+						<li class="sidenav-close"><a data-ui-sref="menu.lista_unidade_solicitante">Listar Unidades Solicitantes</a></li>
+						<li class="sidenav-close"><a data-ui-sref="menu.novo_procedimento">Novo Procedimento</a></li>
+						<li class="sidenav-close"><a data-ui-sref="menu.lista_procedimento">Listar Procedimentos</a></li>
+						<li class="sidenav-close"><a data-ui-sref="menu.novo_usuario">Novo Usuário</a></li>
+						<li class="sidenav-close"><a data-ui-sref="menu.lista_usuario">Listar Usuários</a></li>
+					</ul>
+				</div>
+			</li>
+		</ul>		
+	</li>
+	<li><div class="divider"></div></li>
+	<li>
+		<a class="collapsible-header waves-effect sidenav-close" data-ng-click="menu.logout()">Logout<i class="material-icons right">exit_to_app</i></a>
+	</li>
+</ul>
+<nav class="noprint">
+	<div class="nav-wrapper container">
+		<a href="#" data-target="slide-out" class="sidenav-trigger hide-on-large-only"><i class="material-icons">menu</i></a>
+	</div>
+</nav>
+<div class="row" data-ui-view></div>

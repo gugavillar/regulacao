@@ -1,0 +1,54 @@
+<div class="container">
+	<div class="row center-align">
+		<div class="push-m3 push-l3 col s12 m6 l6">
+			<div class="card login horizontal z-depth-3">
+				<div class="card-stacked">
+					<div class="card-content">
+						<img class="responsive-img" src="dist/svg/marca_cantilever.svg" alt="Imagem" />
+						<form data-ng-submit="login.entrar()" name="loginForm">
+							<div class="input-field">
+								<i class="material-icons prefix">account_circle</i>
+								<input data-ng-model="login.dados.user" data-ng-minlength="4"
+									data-ng-pattern="/^((?=\w\S)([a-z]{4,10}))$/" type="text"
+									data-ng-class="{'invalid': loginForm.usuario.$error.minlength || loginForm.usuario.$error.pattern}"
+									name="usuario" id="usuario" required maxlength="10">
+								<label for="usuario">Usuário</label>
+							</div>
+							<div class="input-field">
+								<i class="material-icons prefix">lock</i>
+								<input data-ng-model="login.dados.pass" data-ng-minlength="8"
+									data-ng-pattern="/^((?=.*\d)(?=.*\w)[0-9a-z]{8})/"
+									data-ng-class="{'invalid': loginForm.senha.$error.minlength || loginForm.senha.$error.pattern}"
+									name="senha" id="senha" type="password" required maxlength="8">
+								<label for="senha">Senha</label>
+							</div>
+							<button class="btn-large waves-effect waves-light"
+								data-ng-disabled="loginForm.$invalid">Entrar</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--Modal Chage Password-->
+<div id="mudar" class="modal">
+	<div class="modal-content center-align">
+		<h4>Bem Vindo</h4>
+		<p>Este é o seu primeiro acesso ao sistema é necessário definir uma nova senha</p>
+		<form name="alterSenha" data-ng-submit="login.change()">
+			<div class="input-field">
+				<i class="material-icons prefix">lock</i>
+				<input data-ng-model="login.dados.novasenha" data-ng-minlength="8"
+					data-ng-pattern="/^((?=.*\d)(?=.*\w)[0-9a-z]{8})/"
+					data-ng-class="{'invalid': alterSenha.novasenha.$error.minlength || alterSenha.novasenha.$error.pattern}"
+					name="novasenha" id="novasenha" type="password" required maxlength="8">
+				<label for="novasenha">Nova Senha</label>
+			</div>
+			<div class="modal-footer">
+				<button data-ng-disabled="alterSenha.$invalid" class="btn btn-default">Alterar</button>
+			</div>
+		</form>
+	</div>
+</div>
